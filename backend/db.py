@@ -31,4 +31,6 @@ attendance_collection = db["attendance"]
 
 teachers_collection = db["teachers"]
 
+teacher_assignments_collection = db["teacher_assignments"]
 
+attendance_stats_collection = db["attendance_stats"] 

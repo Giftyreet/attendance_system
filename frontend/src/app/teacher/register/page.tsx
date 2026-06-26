@@ -1,12 +1,11 @@
 "use client";
 
+import { API_URL } from "@/lib/api";
 import { useState } from "react";
 
 export default function TeacherRegister() {
   const [teacherId, setTeacherId] = useState("");
   const [name, setName] = useState("");
-  const [subject, setSubject] = useState("");
-  const [section, setSection] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -23,16 +22,13 @@ export default function TeacherRegister() {
 
       formData.append("teacher_id", teacherId);
       formData.append("name", name);
-      formData.append("subject", subject);
-      formData.append("section", section);
 
-      const response = await fetch(
-        "http://127.0.0.1:8000/register-teacher",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+      console.log(API_URL);
+
+      const response = await fetch(API_URL + "/register-teacher", {
+        method: "POST",
+        body: formData,
+      });
 
       const data = await response.json();
 
@@ -44,8 +40,6 @@ export default function TeacherRegister() {
       ) {
         setTeacherId("");
         setName("");
-        setSubject("");
-        setSection("");
       }
     } catch (error) {
       console.error(error);
@@ -82,28 +76,6 @@ export default function TeacherRegister() {
           value={name}
           onChange={(e) =>
             setName(e.target.value)
-          }
-          className="border p-2 rounded"
-          required
-        />
-
-        <input
-          type="text"
-          placeholder="Subject"
-          value={subject}
-          onChange={(e) =>
-            setSubject(e.target.value)
-          }
-          className="border p-2 rounded"
-          required
-        />
-
-        <input
-          type="text"
-          placeholder="Section"
-          value={section}
-          onChange={(e) =>
-            setSection(e.target.value)
           }
           className="border p-2 rounded"
           required
